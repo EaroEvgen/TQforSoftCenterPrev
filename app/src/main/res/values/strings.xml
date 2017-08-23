@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">TQforSoftCenterPrev</string>
+    <string name="activity_main_btn_view_type">VIEW TYPES</string>
+    <string name="activity_main_btn_view_card">VIEW CARDS</string>
+    <string name="btn_cancel">CANCEL</string>
+    <string name="btn_add">ADD</string>
+    <string name="btn_delete">DELETE</string>
+    <string name="btn_change">CHANGE</string>
+    <string name="text_view_hint_name">Input name</string>
+    <string name="text_view_hint_number">Input number</string>
+    <string name="text_view_hint_percent">Input percent</string>
+</resources>
