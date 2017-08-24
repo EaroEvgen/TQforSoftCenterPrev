@@ -29,6 +29,7 @@ public class ViewCardActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "onCreate");
 
         dbHelper = new mySQLiteHelper(this);
+        // FIXME: 24.08.2017 Хорошим тоном является закрывать подключение к БД и курсоры после использования, в противном случае может возникнуть утечка ресурсов, а в многопоточном приложении все и вовсе перестанет работать
         db = dbHelper.getWritableDatabase();
         Cursor cardTableCursor = db.query("cardstable", null, null, null, null, null, null);
         Cursor typeTableCursor = db.query("typecardstable", null, null, null, null, null, null);
@@ -48,6 +49,7 @@ public class ViewCardActivity extends AppCompatActivity {
                         ", type = " + cardTableCursor.getString(typeColIndex) +
                         ", number = " + cardTableCursor.getString(numberColIndex) );
                 int erh = cardTableCursor.getInt(cardTableCursor.getColumnIndex("type"));
+                // FIXME: 24.08.2017 Позиция внутри курсора в общем случае никогда не будет совпадать с ID, тем более что в курсоре не задана сортировка
                 typeTableCursor.moveToPosition(erh);
                 list.add(cardTableCursor.getString(nameColIndex) + "\n" +
                         typeTableCursor.getString(typeTableCursor.getColumnIndex("name")) + "\n" +
@@ -55,6 +57,7 @@ public class ViewCardActivity extends AppCompatActivity {
             } while (cardTableCursor.moveToNext());
         } else
             Log.d(LOG_TAG, "0 rows");
+        // FIXME: 24.08.2017 Обновлять список стоит в onResume, в противном случае мы не увидим изменения возвращаясь с других экранов
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1, list);
         listCard.setAdapter(adapter);
         listCard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -67,6 +70,8 @@ public class ViewCardActivity extends AppCompatActivity {
 
     private void chouseCardListItem(int position) {
         Log.d(LOG_TAG, "chouseCardListItem");
+        // FIXME: 24.08.2017 Вместо extra command лучше использовать setAction
+        // FIXME: 24.08.2017 position и ID в общем случае совпадать не будут, необходимо передавать ID элемента
         startActivity(new Intent(this, AddCardActivity.class).putExtra(MainActivity.COMMAND, 1).putExtra(MainActivity.DATA, position));
     }
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+// FIXME: 24.08.2017 В данном задании этот экран абсолютно лишний - можно сразу отображать список карт, а там делать навигацию в Типы карт
 public class MainActivity extends AppCompatActivity {
 
     final String LOG_TAG = "MainActivityLog ::";
