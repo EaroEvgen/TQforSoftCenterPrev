@@ -14,6 +14,9 @@ public class mySQLiteHelper extends SQLiteOpenHelper{
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // FIXME: 24.08.2017 Наименование таблиц и полей лучше выносить в констатны - позволяет избежать опечаток
+        // FIXME: 24.08.2017 Обязательным полям стоит прописывать ограничение NOT NULL
+        // FIXME: 24.08.2017 Поскольку таблицы связаны, то необходимо использовать ограничение внешнего ключа (FOREIGN KEY), желательно с указанием действий при удалении/изменении родителя
         db.execSQL("create table cardstable("
                 + "id integer primary key autoincrement,"
                 + "name text,"

@@ -51,6 +51,7 @@ public class AddCardActivity extends AppCompatActivity {
         recCOM = recIntent.getIntExtra(MainActivity.COMMAND, 2);
         recDATA = recIntent.getIntExtra(MainActivity.DATA, 0);
 
+        // FIXME: 24.08.2017 Такие вещи стоит задавать непосредственно в layout
         nameCard.setText("");
         numberCard.setText("");
         nameCard.setHint(R.string.text_view_hint_name);
@@ -105,6 +106,7 @@ public class AddCardActivity extends AppCompatActivity {
         ContentValues cv = new ContentValues();
 
         if (recCOM == 0) {
+            // FIXME: 24.08.2017 Всегда надо проверять вводимые пользователем данные. Так, если заданием было определено, что номер карты обязателен - стоит проверить его на пустоту, например, с помощью TextUtils.isEmpty
             cv.put("name", nameCard.getText().toString());
             cv.put("number", numberCard.getText().toString());
             cv.put("type", tempStr);
@@ -124,6 +126,7 @@ public class AddCardActivity extends AppCompatActivity {
 
         } //else ошибка
         dbHelper.close();
+        // FIXME: 24.08.2017 Лишние запуски Activity приводят к нарушению навигации. Необходимо использовать finish() или использовать флаг Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(new Intent(this, ViewCardActivity.class));
     }
 
